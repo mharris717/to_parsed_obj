@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+require 'to_parsed_obj/ext'
 
 TP = ToParsedObj
-require 'date'
 
 describe "ToParsedObj" do
   before do

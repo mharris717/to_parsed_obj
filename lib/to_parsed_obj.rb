@@ -48,6 +48,7 @@ module ToParsedObj
       self.parsers << ToParsedObj::SingleParser.new(ops)
     end
     def add_basic!
+      require 'date'
       add(:matcher => /^[0-9]+$/, :convertor => :to_i)
       add(:matcher => [/^[0-9\.]+$/,/^[^\.]*\.[^\.]*$/], :convertor => :to_f)
       add(:matcher => /^\d+[\/\\]\d+[\/\\]\d+$/) { |str| Date.parse(str) }
@@ -70,8 +71,3 @@ module ToParsedObj
   end
 end
 
-class Object
-  def to_parsed_obj
-    ToParsedObj.parse(self)
-  end
-end
