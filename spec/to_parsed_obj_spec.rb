@@ -3,6 +3,11 @@ require 'to_parsed_obj/ext'
 
 TP = ToParsedObj
 
+class Foo
+  include FromHash
+  attr_accessor :bar
+end
+
 describe "ToParsedObj" do
   before do
     TP::Parsers.instance!
@@ -41,5 +46,16 @@ describe "ToParsedObj" do
   mit 'should parse time inspect with no hours' do
     t = Time.local(2010,4,1)
     t.inspect.should parse_to(t)
+  end
+  mit "should pass unknown object through" do
+    f = Foo.new
+    f.should parse_to(f)
+  end
+  mit "should use class parser" do
+    TP.add :matcher => Foo do |obj|
+      obj.bar * 2
+    end
+    f = Foo.new(:bar => 12)
+    f.should parse_to(24)
   end
 end

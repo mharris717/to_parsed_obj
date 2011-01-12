@@ -13,6 +13,8 @@ module ToParsedObj
         m.call(obj)
       elsif m.kind_of?(Array)
         m.all? { |x| match?(obj,x) }
+      elsif m.kind_of?(Class)
+        obj.kind_of?(m)
       else
         m == obj
       end
