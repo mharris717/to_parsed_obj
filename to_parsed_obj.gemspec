@@ -28,7 +28,8 @@ Gem::Specification.new do |s|
     "lib/to_parsed_obj.rb",
     "lib/to_parsed_obj/ext.rb",
     "spec/spec_helper.rb",
-    "spec/to_parsed_obj_spec.rb"
+    "spec/to_parsed_obj_spec.rb",
+    "to_parsed_obj.gemspec"
   ]
   s.homepage = %q{http://github.com/mharris717/to_parsed_obj}
   s.licenses = ["MIT"]
