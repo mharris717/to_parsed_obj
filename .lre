@@ -1,0 +1,18 @@
+def run_specs!
+  require 'rspec'
+  RSpec.instance_eval { @configuration = RSpec::Core::Configuration.new }
+  RSpec::world.instance_eval { @example_groups = [] }
+  load "spec/to_parsed_obj_spec.rb"
+
+  #puts RSpec::world.shared_example_groups.size
+  RSpec::Core::Runner.run([], $stderr, $stdout)
+end
+
+LRE.watch(".*spec/.*.rb") do |f|
+  run_specs!
+end
+
+LRE.watch(".*lib/.*.rb") do |f|
+  load(f)
+  run_specs!
+end

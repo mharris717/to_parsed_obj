@@ -27,6 +27,12 @@ describe "ToParsedObj" do
   mit "should convert float" do
     "2.3".should parse_to(2.3)
   end
+  mit "should convert negative int" do
+    "-2".should parse_to(-2)
+  end
+  mit "should convert negative float" do
+    "-2.3".should parse_to(-2.3)
+  end
   mit "should not parse multiple dots to float" do
     "1.2.3".should parse_to("1.2.3")
   end
@@ -35,6 +41,9 @@ describe "ToParsedObj" do
   end
   mit "should parse time with hours and minutes" do
     "4/1/2010 12:30".should parse_to(Time.local(2010,4,1,12,30) )
+  end
+  mit "should parse time with single digit hour and minutes" do
+    "4/1/2010 2:30".should parse_to(Time.local(2010,4,1,2,30) )
   end
   mit "should parse time with seconds" do
     "4/1/2010 12:30:01".should parse_to(Time.local(2010,4,1,12,30,1) )
@@ -57,5 +66,10 @@ describe "ToParsedObj" do
     end
     f = Foo.new(:bar => 12)
     f.should parse_to(24)
+  end
+  mit 'one time' do
+    require 'date'
+    "TODAY".to_parsed_obj.should == 'TODAY'
+    "TODAY".to_parsed_obj('TODAY' => lambda { Date.today }).should == Date.today
   end
 end
