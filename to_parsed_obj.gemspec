@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".document",
+    ".lre",
     ".rspec",
     "Gemfile",
     "Gemfile.lock",
